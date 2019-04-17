@@ -7,7 +7,7 @@
             .closedBox{background-color: rgb(0, 0, 0)}
             
             .box {
-                   padding: 10px;
+                   padding: 20px;
                    height: 200px;
             }
             
@@ -26,7 +26,7 @@
             <h3>Treasure Hunt</h3>
             <div id="boxes" class = "row"></div>
             <h5>Guesses:
-                 <p id="guess"></p>
+                 <span id="guess"></span>
             </h5>
             
         </div>
@@ -91,15 +91,14 @@
                 $('#boxes').empty();
                 for (var i in model.boxList)
                 {
-                    console.log(i);
+                    
                     
                     let item = $("<div></div>");
                     item.addClass("col-6").addClass("box").addClass("border");
                     
-                    console.log("Col " + i);
+                    
                     item.attr("id", i);
                 
-                    console.log(i + "closed treasure chest appears");
                     if(model.boxList[i].treasure == true && model.boxList[i].flipped == true)
                     {
                         item.addClass("treasure");
@@ -114,7 +113,7 @@
                     
                     
                 }
-                document.getElementById('guesses').InnerHTML += "Insert text here <br/>";
+                 $("#guess").text(model.guesses);
                
                 
                 
@@ -126,9 +125,11 @@
                 if(model.gameOver == false)
                 {
                     model.guesses++;
+                    
                     model.selected = $(this).attr('id');
                     model.boxList[model.selected].flipped = true;
                     updateView();
+                    console.log(model.guesses);
                     if(model.selected == model.treasure)
                     {
                         console.log("You've found the treasure!");
